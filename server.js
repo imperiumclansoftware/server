@@ -10,6 +10,8 @@ const authRoutes = require('./app/routes/auth-routes');
 const errorsMiddleWare = require('./app/middlewares/errors-middleware');
 const rateLimiterMiddleware = require('./app/middlewares/rateLimiter-middleware');
 
+const cookieParser = require('cookie-parser');
+
 const fs = require('fs');
 const morgan = require('morgan');
 const path = require('node:path');
@@ -34,6 +36,7 @@ app.use(rateLimiterMiddleware.global);
 app.use(cors());
 app.use(helmet());
 app.use(morgan("combined",{stream: accessLogStream}))
+app.use(cookieParser());
 
 app.get('/',(request,response) => {
 return response.json({message: 'Hello World !'});

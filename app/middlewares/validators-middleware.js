@@ -1,11 +1,12 @@
 const { validationResult, body } = require("express-validator");
 
 const  validatorsMiddleware = {
-    email: body("email").notEmpty().bail().isEmail(),
+    email: body("email").notEmpty().bail().trim().isEmail(),
     password: body("password").notEmpty().bail().isStrongPassword({
         minLength: 15,
         minNumbers:1,
         minUppercase:1,
+        minLowercase:1,
         minSymbols: 1
     }),
     report: (req,res,next) => {

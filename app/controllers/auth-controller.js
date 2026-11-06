@@ -36,7 +36,7 @@ const authCtrl = {
                 issuer: "imperiumclan.fr", audience: "www.imperiumclan.fr", subject: "Shop IC", expiresIn: 15 * 60 * 1000
             });
 
-            res.cookie("token",{
+            res.cookie("token",token,{
                 maxAge: 15*60*1000,
                 httpOnly: true,
                 secure: false
