@@ -1,0 +1,65 @@
+openapi: 3.2.0
+info:
+  title: Shop API
+  version: 1.0.0
+servers:
+  - url: http://{local_ip}:{local_port}/{endpoint_prefix}
+    description: The Dev api from formation API Rest
+    name: Dev
+    variables:
+      local_ip: 
+        default: '192.168.12.95'
+        description: Adresse IP locale
+      local_port: 
+        enum:
+          - '3000'
+          - '5000'
+        default: '3000'
+        description: Port TCP local
+      endpoint_prefix:
+        default: 'v1'
+        description: Préfix du endpoint
+paths: 
+  /users:
+    post:
+      operationId: createUser
+      description: Créer un utilisateur
+      responses:
+        '201': 
+          $ref: '#/components/responses/CreateUser'
+
+components:
+  responses:
+    CreateUser:
+      description: "Réponse en cas de réussite de la création d'un utilisateur"
+      content: 
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateUser'
+          examples: 
+            CreateUser: 
+              $ref: '#/components/examples/CreateUser'
+            
+          
+  schemas: 
+    CreateUser:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        location: 
+          type: string
+
+  examples:
+    CreateUser:
+      summary: "Example de réponse lors de la création d'un utilisateur"
+      value: 
+        code: 201
+        messages: 'user created'
+        localtion: '/users/e9d36565-f9a4-4147-80fd-8f6b440644ab'
+
+
+
